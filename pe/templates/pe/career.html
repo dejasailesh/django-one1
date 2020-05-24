@@ -1,0 +1,72 @@
+{% extends 'pe/base.html' %}
+{% block title %}Elixer/Career{% endblock title %}
+{% block content %}
+<!-- Container (Services Section) -->
+<div id="services" class="container-fluid text-center">
+  <h2>CAREERS</h2>
+  <h4>Career at Elixier</h4>
+  <br>
+  <div class="row slideanim">
+  {% for c in careers %}
+      <div class="col-sm-4">
+      <h4>{{ c.name }}</h4>
+      {% for f in c.careerfield_set.all %}
+      <a href={{ f.get_absolute_url }}><p>{{ f }}</p></a>
+      {% endfor %}
+        {% if forloop.counter|divisibleby:3 %}
+      </div></div><div class="row slideanim"><hr>
+      {% else %}
+      </div>
+      {% endif %}
+
+{% endfor %}  
+ </div>
+{% endblock content %}
+Careers
+
+    Our Purpose
+    Audit & Assurance
+    Consulting
+    Risk and Financial Advisory
+    Tax
+    Internal Services
+
+Students
+
+    Undergraduate
+    Advanced Degree
+    Professional Development
+    Recruiting Process
+    On Campus
+
+Experienced Professionals
+
+    Recruiting Process
+    Executives
+    Industries
+
+Job Search
+
+    Student Jobs
+    Experienced Professional Jobs
+    Recruiting Tips
+    Explore Your Fit
+    Labor Condition Applications
+
+Life at Deloitte
+
+    Life at Deloitte Blog
+    Meet Our People
+    Inclusion
+    Corporate Citizenship
+    Leadership Development
+    Empowered Well-Being
+    Deloitte University
+
+Alumni Relations
+
+    Update Your Information
+    Events
+    Career Development Support
+    Marketplace Jobs Dashboard 
+    

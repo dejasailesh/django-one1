@@ -1,5 +1,5 @@
-{% extends 'base.html' %}
-
+{% extends 'pe/base.html' %}
+{% block title %}Elixier/Contact{% endblock title %}
  {% block content %}
 <!-- Container (Contact Section) -->
 <div id="contact" class="container-fluid bg-grey">
@@ -7,9 +7,13 @@
   <div class="row">
     <div class="col-sm-5">
       <p>Contact us and we'll get back to you within 24 hours.</p>
-      <p><span class="glyphicon glyphicon-map-marker"></span> Chicago, US</p>
-      <p><span class="glyphicon glyphicon-phone"></span> +00 1515151515</p>
-      <p><span class="glyphicon glyphicon-envelope"></span> myemail@something.com</p>
+      {% if contact %}
+      {% for c in contact %}
+      <p><span class="glyphicon glyphicon-map-marker"></span> {{ c.myadd }}</p>
+      <p><span class="glyphicon glyphicon-phone"></span> {{ c.myphn }} </p>
+      <p><span class="glyphicon glyphicon-envelope"></span> {{ c.myemail }}</p>
+      {% endfor %}
+      {% endif %}
     </div>
     <div class="col-sm-7 slideanim">
       <div class="row">

@@ -1,5 +1,13 @@
 from django.shortcuts import render
-from .models import BaseContent, Contact
+from .models import (
+    BaseContent,
+    Contact,
+    Service,
+    ServiceField,
+    Career,
+    CareerField,
+    PortFolio,
+)
 
 # Create your views here.
 def index(request):
@@ -7,19 +15,28 @@ def index(request):
     context = {
         "base": base,
     }
-    return render(request, "pe/base.html", context)
+    return render(request, "pe/index.html", context)
 
 
 def service_view(request):
-    return render(request, "pe/services.html",)
+    service = Service.objects.all()
+    return render(request, "pe/services.html", {"services": service,})
+
+
+def career_view(request):
+    career = Career.objects.all()
+
+    return render(request, "pe/career.html", {"careers": career,})
 
 
 def portfo(request):
-    return render(request, "pe/portfo.html",)
+    pf = PortFolio.objects.all()
+    return render(request, "pe/portfo.html", {"portfolio": pf})
 
 
 def about(request):
-    return render(request, "pe/about.html",)
+    about = BaseContent.objects.all()
+    return render(request, "pe/about.html", {"about": about})
 
 
 def contact_view(request):
@@ -28,3 +45,11 @@ def contact_view(request):
         "contact": contact,
     }
     return render(request, "pe/contact.html", context)
+
+
+def respond_view(request):
+    return render(request, "pe/career.html",)
+
+
+def respond_view(request):
+    return render(request, "pe/respond.html",)

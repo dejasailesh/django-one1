@@ -1,11 +1,12 @@
 from django.db import models
+from PIL import Image
 
 # Create your models here.
 class BaseContent(models.Model):
-    intro = models.TextField(max_length=100)
-    about = models.TextField(max_length=100)
-    mission = models.TextField(max_length=200)
-    vision = models.TextField(max_length=100)
+    intro = models.TextField(max_length=300)
+    about = models.TextField(max_length=350)
+    mission = models.TextField(max_length=250)
+    vision = models.TextField(max_length=300)
     footer = models.TextField(max_length=60)
 
 
@@ -18,3 +19,60 @@ class Contact(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Service(models.Model):
+    name = models.TextField(max_length=50)
+    pub_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.name
+
+
+class ServiceField(models.Model):
+    service = models.ForeignKey(Service, on_delete=models.CASCADE)
+    field = models.TextField(max_length=50,)
+    pub_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.field
+
+
+class Career(models.Model):
+    name = models.TextField(max_length=50)
+    pub_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.name
+
+
+class CareerField(models.Model):
+    career = models.ForeignKey(Career, on_delete=models.CASCADE)
+    field = models.TextField(max_length=60,)
+    pub_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.field
+
+    def get_absolute_url():
+        return reverse("career_detail", args=[str(self.id)])
+
+
+class PortFolio(models.Model):
+    name = models.TextField(max_length=50)
+    logo = models.ImageField(upload_to="products_pics", blank=False)
+
+    def __str__(self):
+        return self.name
+
+    def save(self):
+        if not self.logo:
+            return
+
+        super().save()
+
+        image = Image.open(self.logo.path)
+        if image.height > 600 or image.width > 600:
+            output_size = (500, 500)
+            image.thumbnail(output_size)
+            image.save(self.logo.path)
