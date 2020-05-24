@@ -60,7 +60,7 @@ class CareerField(models.Model):
 
 class PortFolio(models.Model):
     name = models.TextField(max_length=50)
-    logo = models.ImageField(upload_to="products_pics", blank=False)
+    logo = models.ImageField(upload_to="image/products_pics", blank=False)
 
     def __str__(self):
         return self.name
