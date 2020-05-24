@@ -1,5 +1,4 @@
 from django.db import models
-from PIL import Image
 
 # Create your models here.
 class BaseContent(models.Model):
@@ -65,14 +64,3 @@ class PortFolio(models.Model):
     def __str__(self):
         return self.name
 
-    def save(self):
-        if not self.logo:
-            return
-
-        super().save()
-
-        image = Image.open(self.logo.path)
-        if image.height > 600 or image.width > 600:
-            output_size = (500, 500)
-            image.thumbnail(output_size)
-            image.save(self.logo.path)
